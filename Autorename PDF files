@@ -1,0 +1,111 @@
+from email.mime import text
+from tkinter import *
+from tkinter import filedialog
+import os
+
+# création de quelque font pou utiliser aprés
+font1 = ('Brightness', 14, 'normal')
+font2 = ('cute notes', 20, 'normal')
+font3 = ('joy neon', 14, 'normal')
+font4 = ('neon one', 14, 'normal')
+font5 = ('roboto', 11, 'normal')
+font6 = ('roboto', 10, 'normal')
+font7 = ('adam', 12, 'normal')
+
+# création de windows sous nom win
+
+win = Tk()
+win.geometry("510x290")  # géometrie
+win.configure(bg="#DCDCDC")  # couleur de fond
+win.title("Rename tools(Kj)")  # Titre de la fenêtre
+win.iconbitmap("Kj.ico")  # affecté une icone au fenetre
+win.overrideredirect(0)
+
+
+
+def percorir():
+    text = filedialog.askdirectory()
+    chemin.insert(0, text)
+    path = text
+    return None
+
+
+def button_clear():
+    chemin.delete(0, END)
+    new_pref.delete(0, END)
+    return None
+
+
+def button_renommer():
+    x = str(chemin.get())
+    # print(x)
+    y = 1
+    prifixe = str(new_pref.get())
+    print(prifixe)
+
+    path = os.chdir(x)
+    print(path)
+    for file in os.listdir(path):
+        new_file_name = (prifixe + "{}.pdf".format(y))
+        os.renames(file, new_file_name)
+        y += 1
+    return None
+
+
+# Entry 1 widget difinition
+chemin = Entry(win, bd=1)
+chemin.place(x=200, y=50)
+
+# label 1
+lb1 = Label(win, text="Emplacement des fichiers:", font=font6, fg="#778899", bg="#FFD700")  # case d'entrée1
+lb1.place(x=15, y=45)  # coordoné
+# label 2 difinition
+
+lb2 = Label(win, text="noveau nom                     :", font=font6, fg="#778899", bg="#FFD700")
+lb2.place(x=15, y=100)
+
+# new_pref difinition
+
+new_pref = Entry(win, bd=2)
+new_pref.place(x=200, y=100)
+
+# chemin.pack()
+
+# Button1 widget
+bt1 = Button(win, text="Emplacement des fichier", font=font6, bg="#FFD700", width=20, command=percorir)
+bt1.place(x=350, y=45)
+
+# Button2 widget
+bt2 = Button(win, text="Multi rename files", font=font6, bg="#ffe066", width=20, bd=3, command=button_renommer)
+bt2.place(x=350, y=100)
+
+# Button3 widget
+bt3 = Button(win, text="Clear", font=font6, bg="#FFC125", width=20, command=button_clear)
+bt3.place(x=350, y=220)
+
+# Close button
+exit=Button(win,text="CLOSE",font= font6,bg="#FFC125", width=20, command=win.destroy)
+exit.place(x=350, y=260)
+
+win.mainloop()
+
+# from tkinter import *
+# from tkinter import filedialog
+# import os
+#
+# w=Tk()
+# w.geometry('800x250')
+#
+# def button_command():
+#     text = filedialog.askdirectory()
+#     chemin.insert(0,text)
+#     print(text)
+#
+#
+# #Entry widget
+# chemin = Entry(w,)
+# chemin.pack()
+#
+# #Button widget
+#
+# Button(w,text ="Emplacement des fichier",command =button_command ).pack()
